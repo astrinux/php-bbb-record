@@ -3,7 +3,7 @@
 $presentation_url_base = "https://cloud.lmsnovinparsian.com/playback/presentation/2.0/playback.html?meetingId=";
 $presentation_dir_base = "/var/bigbluebutton/published/presentation/";
 
-$presentation_dirs = array_filter(glob($presentation_dir_base . '*'), 'is_dir'); 
+$presentation_dirs = array_filter(glob($presentation_dir_base . '*'), 'is_dir'); // Find directories in the base dir
 array_multisort(array_map('filemtime', $presentation_dirs), SORT_NUMERIC, SORT_DESC, $presentation_dirs); // Sort by file mtime
 
 date_default_timezone_set('Asia/Tehran'); // Time zone
@@ -19,7 +19,7 @@ foreach ($presentation_dirs as $dir)
 	{
 		if ($meeting_name != $_GET["meeting_name"])
 		{
-	    continue;
+			continue;
 		}
 	}
 
@@ -28,8 +28,6 @@ foreach ($presentation_dirs as $dir)
 
 	$meeting_start_time = intval(substr($xml -> start_time, 0, 10)); // Extract 10 first digits (unix timestamp)
 	$meeting_date = date("Y-m-d H:i:s", $meeting_start_time);
-	$meeting_data_shamsi = "d";
-	$meeting_date_shamsi = jdate("j F Y", $meeting_start_time);
 
 	$playback_size = (int)($xml -> playback -> size / 1000000); // Size in MB
 
