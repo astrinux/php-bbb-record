@@ -12,7 +12,7 @@ foreach ($presentation_dirs as $dir)
 {
 	$meeting_id = substr($dir, strlen($presentation_dir_base)); // Extract meeting ID from directory's name 
 
-	$xml = simplexml_load_file($presentation_dir_base . $meeting_id . "/metadata.xml");
+	$xml = simplexml_load_file($dir . "/metadata.xml");
 
 	$meeting_name = $xml -> meta -> meetingName;
 	if (isset($_GET["meeting_name"]))
